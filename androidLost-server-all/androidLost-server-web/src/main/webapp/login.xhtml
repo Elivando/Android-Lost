@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="shortcut icon" type="image/x-icon"
+		href="/resources/images/shortcut-icon.png" />
+	<title>Android Lost</title>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl id="growl" showDetail="true" life="3000" />
+
+		<p:dialog id="dialog" header="Login" widgetVar="dlg" resizable="false"
+			closable="false">
+
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="usuario" value="Usuário:" />
+				<p:inputText value="#{controlBean.usuario.login}" id="usuario"
+					label="Usuario" />
+
+				<h:outputLabel for="senha" value="Senha:" />
+				<p:password value="#{controlBean.usuario.senha}" id="senha"
+					label="Senha" />
+
+				<f:facet name="footer">
+					<p:commandButton id="loginButton" value="Login" update="growl"
+						actionListener="#{controlBean.login}"
+						oncomplete="handleLoginRequest(xhr, status, args)" />
+					<p:commandButton id="cadastroButton" value="Cadastrar"
+						imediate="true" action="pages/cadastro.faces" />
+				</f:facet>
+			</h:panelGrid>
+
+		</p:dialog>
+	</h:form>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			PF('dlg').show();
+		});
+		function handleLoginRequest(xhr, status, args) {
+			if (args.validationFailed || !args.loggedIn) {
+				PF('dlg').jq.effect("shake", {
+					times : 5
+				}, 100);
+			}
+		}
+	</script>
+</h:body>
+</html>

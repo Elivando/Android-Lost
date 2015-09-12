@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="./base/master.xhtml">
+	<ui:define name="content">
+		<h3>Dados Cadastrais</h3>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h:form styleClass="form-horizontal">
+					<p:messages id="messages" showDetail="false" autoUpdate="true"
+						closable="true" />
+					<div class="form-group">
+						
+						<div class="col-sm-6">
+							<h5>Login:</h5>
+							<p:inputText value="#{controlBean.usuario.login}" id="login"
+								required="true" readonly="true" styleClass="form-control" />
+						</div>
+
+						<div class="col-sm-6">
+							<h5>Nome:</h5>
+							<p:inputText value="#{controlBean.usuario.nome}" id="nome"
+								requiredMessage="O campo Nome é necessário." required="true"
+								styleClass="form-control" />
+						</div>
+
+						<div class="col-sm-6">
+							<h5>CPF:</h5>
+							<p:inputMask value="#{controlBean.usuario.cpf}" id="cpf"
+								requiredMessage="O campo CPF é necessário." readonly="true"
+								validatorMessage="CPF em formato inválido!" required="true"
+								mask="999.999.999-99" styleClass="form-control">
+								<f:validateRegex pattern="^\d{3}\.\d{3}\.\d{3}\-\d{2}$" />
+							</p:inputMask>
+						</div>
+
+						<div class="col-sm-6">
+							<h5>E-mail:</h5>
+							<p:inputText value="#{controlBean.usuario.email}" id="email"
+								requiredMessage="O campo e-mail é necessário."
+								validatorMessage="E-mail em formato inválido!" required="true"
+								styleClass="form-control">
+								<f:validateRegex
+									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</p:inputText>
+						</div>
+						<div class="col-sm-6">
+							<br />
+							<p:commandButton value="Salvar"
+								actionListener="#{controlBean.atualizaUsuario}" />
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

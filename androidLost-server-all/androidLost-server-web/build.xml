@@ -1,0 +1,8 @@
+<project name="androidLost-server-web" default="hot-deploy">
+	<property environment="env" />
+	<target name="hot-deploy">
+		<copy todir="target/AndroidLost">
+			<fileset dir="src/main/webapp/" />
+		</copy>
+	</target>
+</project>
